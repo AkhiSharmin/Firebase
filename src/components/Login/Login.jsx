@@ -1,13 +1,18 @@
-import { GoogleAuthProvider } from "firebase/auth/web-extension";
-import React from "react";
-
-const handleGoogleSingIn = () => {
-  const provider = new GoogleAuthProvider();
-
-  console.log("google coming soon");
-};
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../../firebase/firebase.init";
 
 const Login = () => {
+  const provider = new GoogleAuthProvider();
+  const handleGoogleSingIn = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log("Error", error);
+      });
+  };
+
   return (
     <div>
       <button onClick={handleGoogleSingIn}>Login with Google</button>
